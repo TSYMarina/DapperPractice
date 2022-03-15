@@ -34,7 +34,15 @@ namespace DapperPractice
             _connection.Execute("UPDATE products SET Price = @newValue WHERE ProductID = @productID;",
                 new { newValue = newValue, productID = productID });
 
-            Console.WriteLine($"**Success: Product price for {productID} has been updated.\nThis session is over.\n\n");
+            Console.WriteLine($"**Success: Product price for {productID} has been updated.\n\n");
+        }
+
+        public void DeleteProduct(int productID)
+        {
+            _connection.Execute("DELETE FROM products WHERE ProductID = @productID;",
+                new { productID = productID});
+
+            Console.WriteLine($"**Success: Product {productID} has been removed from the database.\n\n");
         }
 
     }
