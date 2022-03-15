@@ -13,10 +13,11 @@ namespace DapperPractice
 
         static public string GetValidResponse(string userPrompt)
         {
-            string userInput = Console.ReadLine().ToUpper();
+            string userInput = "";
             bool validUserInput = false;
             do
             {
+                userInput = Console.ReadLine().ToUpper();
                 if (userInput.ToUpper() == "ADD" || userInput.ToUpper() == "UPD")
                 {
                     validUserInput = true;
@@ -81,7 +82,7 @@ namespace DapperPractice
                 Console.WriteLine("What is this product's price?");
                 var price = Convert.ToDouble(Console.ReadLine());
 
-                Console.WriteLine("What is its category id?");
+                Console.WriteLine("What is its category id (options 1-10)?");
                 var categoryID = Convert.ToInt32(Console.ReadLine());
 
                 Console.WriteLine("Please enter 1, if product is on sale, otherwise, please enter 0: ");
