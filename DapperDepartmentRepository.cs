@@ -27,5 +27,25 @@ namespace DapperPractice
             _connection.Execute("INSERT INTO departments (Name) VALUES (@departmentName);",
                 new { departmentName = newDepName});
         }
+
+        // adition following th class - same solution as above:
+        //public void CreateDepartment(string newDepName)
+        //{
+        //    _connection.Execute("INSERT INTO departments (Name) VALUES (@name)",
+        //        new { name = newDepName });   // new anonymous method to set parameters to their values
+        //}
+
+        public void UpdateDepartment(int depID, string updatedName)
+        {
+            _connection.Execute("UPDATE departments SET Name =  @name WHERE DepartmentID = @id;",
+                new { name = updatedName, id = depID });
+        }
+
+        public void DeleteDepartment (int departmentID)
+        {
+            _connection.Execute("Delete FROM departments WHERE DepartmentID = @id",
+                new { id = departmentID}); // good reference for naming
+        }
+
     }
 }

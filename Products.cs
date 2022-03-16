@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DapperPractice
 {
-    public class Products
+    public class Products   // data model
     {
         public int ProductID { get; set; }
         public string Name { get; set; }

@@ -54,17 +54,10 @@ namespace DapperPractice
             string connString = config.GetConnectionString("DefaultConnection");
             #endregion
 
+
             IDbConnection connection = new MySqlConnection(connString);
 
-            DapperDepartmentRepository repo = new DapperDepartmentRepository(connection);
-            Console.WriteLine("*******************************************************************");
-            Console.WriteLine("\n\nCurent Departments List: \n");
-            var depos = repo.GetAllDepartments();
-
-            foreach (var dept in depos)
-            {
-                Console.WriteLine($"Dep ID: {dept.DepartmentID}  Name: {dept.Name}\n");
-            }
+            #region Products
 
             DapperProductsRepository repoPr = new DapperProductsRepository(connection);
             Console.WriteLine("*******************************************************************");
@@ -77,6 +70,8 @@ namespace DapperPractice
             }
 
             Console.WriteLine("-------------------------End of Products table-------------------------\n\n");
+
+
 
             Console.WriteLine("Would you like to add a product to the database? Please have product name, price, category ID and stock level ready and enter ADD. \nIf you need to update, please enter UPD to edit product price. \n  8[  We apologize but editing product ID, sale status, product name or stock level is unavailable with current access level 8[ You may delete and re-enter. \nIf you need to delete a product, please enter DEL.\n");
             Console.WriteLine();
@@ -142,6 +137,30 @@ namespace DapperPractice
                     proceed = false;
                 }
             }
+            #endregion Products
+
+            #region Departments 
+            // non-iteractive
+
+            DapperDepartmentRepository repo = new DapperDepartmentRepository(connection);
+            Console.WriteLine("*******************************************************************");
+            Console.WriteLine("\n\nCurent Departments List: \n");
+
+            var depos = repo.GetAllDepartments();
+
+            foreach (var dept in depos)
+            {
+                Console.WriteLine($"Dep ID: {dept.DepartmentID}  Name: {dept.Name}\n");
+            }
+
+            repo.InsertDepartment("TestName"); // should add with ID 5 or higher
+
+            repo.UpdateDepartment(0, "TestName");
+
+            repo.DeleteDepartment(5);  //will work if insertion of TestName above works :)
+
+            #endregion Departments
         }
     }
 }
+

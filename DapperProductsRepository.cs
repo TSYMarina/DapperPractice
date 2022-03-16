@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace DapperPractice
 {
-    internal class DapperProductsRepository : IProductsRepository
+    internal class DapperProductsRepository : IProductsRepository  
     {
         private readonly IDbConnection _connection;
 
-        public DapperProductsRepository(IDbConnection connection)
+        public DapperProductsRepository(IDbConnection connection)  // dependency injection
         {
             _connection = connection;
         }
 
-        public IEnumerable<Products> GetAllProducts()
+        public IEnumerable<Products> GetAllProducts()      // read = select all products
         {
             return _connection.Query<Products>("SELECT * FROM products;");
         }
@@ -26,7 +26,7 @@ namespace DapperPractice
         {
             _connection.Execute("INSERT INTO products (Name, Price, CategoryID, OnSale, StockLevel) VALUES (@name, @price, @categoryID, @onSale, @stockLevel);",
                 new { name = newProdName, price = newPrice, categoryID = newCategoryID, onSale = newOnSale, StockLevel = newStockLevel });
-            Console.WriteLine($"**Success: Your product {newProdName} has been added.\nThis session is over.\n\n");
+            Console.WriteLine($"**Success: Your product {newProdName} has been added.\n\n\n");
         }
 
         public void UpdateProductPrice(int productID, double newValue)
